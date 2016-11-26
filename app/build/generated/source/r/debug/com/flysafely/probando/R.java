@@ -3416,9 +3416,10 @@ containing a value of this type.
         public static final int time_dep_text=0x7f06009a;
         public static final int title_fragment_alerts=0x7f06009b;
         public static final int title_fragment_califications=0x7f06009c;
-        public static final int title_fragment_main=0x7f06009d;
-        public static final int title_fragment_offers=0x7f06009e;
-        public static final int title_fragment_settings=0x7f06009f;
+        public static final int title_fragment_listalerts=0x7f06009d;
+        public static final int title_fragment_main=0x7f06009e;
+        public static final int title_fragment_offers=0x7f06009f;
+        public static final int title_fragment_settings=0x7f0600a0;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08009a;

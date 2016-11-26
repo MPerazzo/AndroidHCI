@@ -7,6 +7,8 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,8 @@ public class MainFragment extends Fragment {
 
     private ListView listView;
 
+    private boolean screenSensorActive;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -76,10 +80,13 @@ public class MainFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
+        screenSensorActive = false;
+
         MainActivity.setHomeTitle();
 
         if (savedInstanceState != null) {
             offerArray = (ArrayList<Offer>) savedInstanceState.getSerializable(OFFERS_ITEMS);
+
             if (listView == null || offerArray == null || !isAdded() || getActivity() == null)
                 return;
             listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
@@ -93,9 +100,10 @@ public class MainFragment extends Fragment {
             return;
         }
 
-
-         if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
+        if (android.provider.Settings.System.getInt(getActivity().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+            screenSensorActive = true;
+        }
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getString(R.string.loading_offers));
@@ -130,7 +138,9 @@ public class MainFragment extends Fragment {
                     mainText.setText(R.string.city_not_found);
                     MainActivity.EnableGoHome();
                     progressDialog.dismiss();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+                    if (screenSensorActive)
+                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                 }
             }
         }, new Response.ErrorListener() {
@@ -140,7 +150,9 @@ public class MainFragment extends Fragment {
                 MainActivity.EnableGoHome();
                 mainText.setText(R.string.city_not_found);
                 progressDialog.dismiss();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+                if (screenSensorActive)
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -157,8 +169,6 @@ public class MainFragment extends Fragment {
         JSONObject Firstelem = cities.getJSONObject(0);
 
         String cityFrom = Firstelem.getString("id");
-
-        String cityDesc = Firstelem.getString("name");
 
         if (cityFrom == null) {
             mainText.setText(R.string.city_not_found);
@@ -186,7 +196,9 @@ public class MainFragment extends Fragment {
                     Toast.makeText(getActivity(), R.string.processing_deals_error , Toast.LENGTH_LONG).show();
                     MainActivity.EnableGoHome();
                     progressDialog.dismiss();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+                    if (screenSensorActive)
+                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                 }
             }
         }, new Response.ErrorListener() {
@@ -195,7 +207,9 @@ public class MainFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.download_deals_error, Toast.LENGTH_LONG).show();
                 MainActivity.EnableGoHome();
                 progressDialog.dismiss();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+                if (screenSensorActive)
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -226,7 +240,9 @@ public class MainFragment extends Fragment {
         listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
 
         progressDialog.dismiss();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+        if (screenSensorActive)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
         MainActivity.EnableGoHome();
     }

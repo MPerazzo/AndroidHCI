@@ -3,7 +3,6 @@ package com.flysafely.probando;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -74,6 +73,10 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
 
     private String cityDesc;
 
+    private String precioString;
+
+    private String userString;
+
     private Bundle bundle;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,11 +95,16 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
         mapView = (MapView) view.findViewById(R.id.map);
 
         offer_text = (TextView) getActivity().findViewById(R.id.offer_text);
+
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
         bundle = savedInstanceState;
+
+        precioString = getString(R.string.precio);
+
+        userString = getString(R.string.map_userpos_text);
 
         super.onActivityCreated(savedInstanceState);
 
@@ -142,8 +150,10 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
             return;
         }
 
-        if (getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+//        if (android.provider.Settings.System.getInt(getActivity().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
+//            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+//            screenSensorActive = true;
+//        }
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getString(R.string.loading_map));
@@ -182,7 +192,7 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
                     Toast.makeText(getActivity(), R.string.processing_nearCity_error, Toast.LENGTH_LONG).show();
                     offer_text.setText(R.string.city_not_found);
                     progressDialog.dismiss();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -191,7 +201,6 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
                 Toast.makeText(getActivity(), R.string.download_nearCity_error, Toast.LENGTH_LONG).show();
                 offer_text.setText(R.string.city_not_found);
                 progressDialog.dismiss();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -235,7 +244,6 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), R.string.download_deals_error , Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                 }
                 for (int i = 0; i < data.length(); i++)
                 {
@@ -252,20 +260,20 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
                             marker = map.addMarker(new MarkerOptions()
                                     .position(city)
                                     .title(data.getJSONObject(i).getJSONObject("city").getString("name"))
-                                    .snippet(getString(R.string.precio) + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
+                                    .snippet(precioString + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                         }
                         else if(Double.parseDouble(data.getJSONObject(i).getString("price")) <= new Double(MEDIUM_PRICE_LIMIT)){
                              marker =map.addMarker(new MarkerOptions()
                                     .position(city)
                                     .title(data.getJSONObject(i).getJSONObject("city").getString("name"))
-                                    .snippet(getString(R.string.precio) + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
+                                    .snippet(precioString + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                         }else {
                             marker = map.addMarker(new MarkerOptions()
                                     .position(city)
                                     .title(data.getJSONObject(i).getJSONObject("city").getString("name"))
-                                    .snippet(getString(R.string.precio) + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
+                                    .snippet(precioString + " " + response.getJSONObject("currency").getString("id") + " " + data.getJSONObject(i).getString("price"))
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                         }
 
@@ -275,6 +283,7 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
                             double longSelected = bundle.getDouble(SELECTED_LONG);
 
                             if (latSelected != GPSTracker.LAT_ERROR_VALUE && longSelected != GPSTracker.LONG_ERROR_VALUE) {
+
                                 line = map.addPolyline(new PolylineOptions()
                                         .add(user_position, new LatLng(latSelected, longSelected))
                                         .width(5)
@@ -282,13 +291,13 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
 
                                 if ( latitude == latSelected && longitude == longSelected ) {
                                     marker.showInfoWindow();
+                                    currentSelected = marker;
                                 }
                             }
                         }
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(), R.string.processing_deals_error , Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
-                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                     }
 
                 }
@@ -298,7 +307,7 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), R.string.database_connection_failed , Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -318,13 +327,12 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
         userMarker = map.addMarker(new MarkerOptions()
                 .position(user_position)
                 .title(cityDesc)
-                .snippet(getString(R.string.map_userpos_text))
+                .snippet(userString)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
         userMarker.showInfoWindow();
 
         progressDialog.dismiss();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     @Override

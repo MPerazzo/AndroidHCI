@@ -3,6 +3,7 @@ package com.flysafely.probando;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -84,9 +85,8 @@ public class SaveAlertFragment extends Fragment {
                                         editor.putStringSet("ALERTS", alertsToSave);
                                         editor.apply();
                                     }
-                                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                                    fragmentTransaction.replace(R.id.content_frame, new ListAlertFragment()).commit();
+                                    MainActivity.AddtoBackStack(new ListFragment(), getString(R.string.title_fragment_listalerts));
 
                                 }
                             }

@@ -3,11 +3,15 @@ package com.flysafely.probando;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
 
-    private FragmentManager fragmentManager;
+    private static FragmentManager fragmentManager;
 
     private boolean upIsActive = false;
 
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean popUpMapVisible;
 
-    private Bundle asd;
+    private Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        asd = savedInstanceState;
+        bundle = savedInstanceState;
 
         //Obtener los strings desde los recursos para el drawer
         home_title = getString(R.string.app_name);
@@ -272,24 +276,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (asd != null) {
-                    selectedDrawerOptions = (ArrayList<Integer>) asd.getSerializable(SELECTED_DRAWER);
-                    currentHighlighted = asd.getInt(CURRENT_HIGHLIGHT);
+                if (bundle != null) {
+                    selectedDrawerOptions = (ArrayList<Integer>) bundle.getSerializable(SELECTED_DRAWER);
+                    currentHighlighted = bundle.getInt(CURRENT_HIGHLIGHT);
 
                     if (currentHighlighted != -1) {
                         Log.e("$$$$$$POSITION", ": " + currentHighlighted);
-                        getViewByPosition(currentHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
+                        View aux = getViewByPosition(currentHighlighted);
+                        if (aux != null)
+                            aux.setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
                     }
                 }
             }
         });
 
+        ContentObserver contentObserver = new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+            }
+        };
+
+        getContentResolver().registerContentObserver(Settings.System.getUriFor
+                        (Settings.System.ACCELEROMETER_ROTATION),
+                true,contentObserver);
+
     }
 
-    public void onStart() {
-
-        super.onStart();
-    }
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -507,7 +521,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void backStackAdd(Fragment fragment, String tag) {
+    private static void backStackAdd(Fragment fragment, String tag) {
 
         if ( fragmentManager.findFragmentByTag(tag) != null) {
 
@@ -616,6 +630,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
+
+    public static void AddtoBackStack(Fragment fragment, String tag) {backStackAdd(fragment, tag); }
 
     public static void setActionBarTitle(String title) {
         actionBarText.setText(title);

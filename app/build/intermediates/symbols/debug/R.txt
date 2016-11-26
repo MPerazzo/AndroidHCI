@@ -1256,9 +1256,10 @@ int string time_arr_text 0x7f060099
 int string time_dep_text 0x7f06009a
 int string title_fragment_alerts 0x7f06009b
 int string title_fragment_califications 0x7f06009c
-int string title_fragment_main 0x7f06009d
-int string title_fragment_offers 0x7f06009e
-int string title_fragment_settings 0x7f06009f
+int string title_fragment_listalerts 0x7f06009d
+int string title_fragment_main 0x7f06009e
+int string title_fragment_offers 0x7f06009f
+int string title_fragment_settings 0x7f0600a0
 int style AlertDialog_AppCompat 0x7f08009a
 int style AlertDialog_AppCompat_Light 0x7f08009b
 int style Animation_AppCompat_Dialog 0x7f08009c

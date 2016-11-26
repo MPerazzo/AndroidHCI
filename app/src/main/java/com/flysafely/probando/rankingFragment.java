@@ -2,6 +2,7 @@ package com.flysafely.probando;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
@@ -9,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.Settings;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Selection;
 import android.util.Log;
@@ -168,6 +170,7 @@ public class rankingFragment extends Fragment {
             progressDialog.setMessage(getActivity().getString(R.string.loading_airlines));
             progressDialog.setCancelable(false);
             progressDialog.show();
+
             getAirlines();
         }
         else {
@@ -272,6 +275,7 @@ public class rankingFragment extends Fragment {
             airlinesTags.add((airlines.getJSONObject(i)).getString("id"));
 
         progressDialog.dismiss();
+
     }
 
 
