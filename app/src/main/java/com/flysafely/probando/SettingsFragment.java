@@ -1,0 +1,169 @@
+package com.flysafely.probando;
+
+import android.app.AlarmManager;
+import android.app.Fragment;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.Spinner;
+import android.widget.Switch;
+
+/**
+ * Created by Administrador on 25/11/2016.
+ */
+
+public class SettingsFragment extends Fragment {
+
+    private View parent;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        parent = inflater.inflate(R.layout.fragment_settings,null);
+
+
+        final Spinner spinner = (Spinner) parent.findViewById(R.id.time_notification);
+        final String[] values = {getResources().getString(R.string.one_minute_text),getResources().getString(R.string.five_minute_text),getResources().getString(R.string.ten_minute_text),
+                getResources().getString(R.string.thirty_minute_text),getResources().getString(R.string.one_hour_text)};
+        if(spinner != null) {
+            spinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, values));
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+                    final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+                    boolean hasAlerts = settings.getBoolean("HASALERTS", false);
+
+                    Integer interval = getInterval(values[position]);
+
+                    setAlarm(interval);
+
+                    SharedPreferences.Editor editor = settings.edit();
+
+                    if(interval != null) {
+                        editor.putInt("INTERVAL", interval);
+                        editor.apply();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent)
+                {
+
+
+                }
+            });
+
+        }
+
+        Switch switchNotification = (Switch) parent.findViewById(R.id.switch_notificaion);
+        if(switchNotification != null) {
+
+            final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+            if(settings.getBoolean("HASALERTS", false)) {
+                switchNotification.setChecked(true);
+            } else {
+                switchNotification.setChecked(false);
+            }
+
+            switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (isChecked) {
+
+                        final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+                        spinner.setEnabled(true);
+
+                        Integer interval = settings.getInt("INTERVAL", 1000);
+
+                        settings.edit().putBoolean("HASALERTS", true).apply();
+
+                        setAlarm(interval);
+
+                    } else {
+
+                        cancelAlarm();
+
+                        final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+                        settings.edit().putBoolean("HASALERTS", false).apply();
+
+                        spinner.setEnabled(false);
+
+                    }
+
+                }
+            });
+        }
+
+        return parent;
+    }
+
+    private Integer getInterval(String interval) {
+
+        String one = getResources().getString(R.string.one_minute_text);
+
+        String five = getResources().getString(R.string.five_minute_text);
+
+        String ten = getResources().getString(R.string.ten_minute_text);
+
+        String thirty = getResources().getString(R.string.thirty_minute_text);
+
+        String hour = getResources().getString(R.string.one_hour_text);
+
+        if(one.equals(interval)) {
+            return 60000;
+        } else if(five.equals(interval)) {
+            return 5*60000;
+        } else if(ten.equals(interval)) {
+            return 10*60000;
+        } else if(thirty.equals(interval)) {
+            return 30*60000;
+        } else if(hour.equals(interval)) {
+            return 60*60000;
+        }
+
+        return 60000;
+    }
+
+    private void setAlarm(Integer interval) {
+
+        AlarmManager alarmManager;
+        PendingIntent alarmNotificationReceiverPendingIntent;
+
+        alarmManager = (AlarmManager) getActivity().getSystemService(MainActivity.ALARM_SERVICE);
+        Intent alarmNotificationReceiverIntent = new Intent(getActivity(), NotificationBroadcastReceiver.class);
+
+        alarmNotificationReceiverPendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmNotificationReceiverIntent, 0);
+
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval, interval, alarmNotificationReceiverPendingIntent);
+    }
+
+    private void cancelAlarm() {
+
+        AlarmManager alarmManager;
+        PendingIntent alarmNotificationReceiverPendingIntent;
+
+        alarmManager = (AlarmManager) getActivity().getSystemService(MainActivity.ALARM_SERVICE);
+
+        Intent alarmNotificationReceiverIntent = new Intent(getActivity(), NotificationBroadcastReceiver.class);
+
+        alarmNotificationReceiverPendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmNotificationReceiverIntent, 0);
+
+        alarmManager.cancel(alarmNotificationReceiverPendingIntent);
+    }
+}

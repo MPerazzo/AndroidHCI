@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/information.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-anydpi-v21/information.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/configuracion.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-anydpi-v21/configuracion.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/experience.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-anydpi-v21/experience.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/notification.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-anydpi-v21/notification.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/ofertas.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-anydpi-v21/ofertas.xml"
+    }
+]

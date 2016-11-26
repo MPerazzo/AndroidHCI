@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_add_white_24dp.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/mipmap-xhdpi/ic_add_white_24dp.png"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/mipmap-xhdpi/logo.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/mipmap-xhdpi/logo.png"
+    }
+]

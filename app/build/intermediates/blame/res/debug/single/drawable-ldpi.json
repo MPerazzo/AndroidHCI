@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-ldpi/experience.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-ldpi/experience.png"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-ldpi/information.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-ldpi/information.png"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-ldpi/configuracion.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-ldpi/configuracion.png"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-ldpi/notification.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-ldpi/notification.png"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable-ldpi/ofertas.png",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/generated/res/pngs/debug/drawable-ldpi/ofertas.png"
+    }
+]

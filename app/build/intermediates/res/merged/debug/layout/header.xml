@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="178dp"
+    android:background="#e3e3e3"
+    android:orientation="vertical"
+    android:id="@+id/header">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/logo"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="38dp"
+        android:id="@+id/circleLogo"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"/>
+
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:text="www.FlySafely.com.ar"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>

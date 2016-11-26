@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- 
+    <array name="navDrawerIcons">
+        <item>@drawable/logo</item>
+        <item>@drawable/logo</item>
+        <item>@drawable/logo</item>
+        <item>@drawable/logo</item>
+        <item>@drawable/logo</item>
+    </array> -->
+
+    <string-array name="Tags">
+	    <item>Alertas</item>
+	    <item>Ofertas</item>
+	    <item>Calificaciones</item>
+		<item>Configuración</item>
+	</string-array>
+
+
+        <!-- Nav Drawer-->
+<!--     <string-array name="navDrawerItems">
+        <item>@string/title_fragment_main</item>
+        <item>@string/title_fragment_search</item>
+        <item>@string/title_fragment_favorites</item>
+        <item>@string/title_fragment_offers</item>
+        <item>@string/title_fragment_settings</item>
+    </string-array> -->
+
+</resources>

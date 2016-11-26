@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/menu/menu_main.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/menu/action_bar_items.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/menu/action_bar_items.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/menu/menu_detail_alert.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/menu/menu_detail_alert.xml"
+    }
+]

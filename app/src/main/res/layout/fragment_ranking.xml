@@ -1,0 +1,222 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroller"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="@string/Aerolinea"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/aerolineaString" />
+
+            <EditText
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions"
+                android:ems="10"
+                android:id="@+id/aerolineaET"/>
+
+            <TextView
+                android:text="@string/NumeroDeVuelo"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nVueloString" />
+
+            <EditText
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/nVueloET" />
+
+            <TextView
+                android:text="Amabilidad"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amabilidadString" />
+
+            <RatingBar
+
+                android:id="@+id/amabilidadRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating ="0.5"/>
+
+            <TextView
+                android:text="@string/Comida"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/comidaString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comidaRB"
+                android:numStars="5"
+                android:rating ="0.5"/>
+
+            <TextView
+                android:text="@string/Puntualidad"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/puntualidadString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/puntualidadRB"
+                android:rating ="0.5"/>
+
+            <TextView
+                android:text="@string/ProgramaDeViajerosFrecuentes"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/PDVFString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/PDVFSRB"
+                android:rating ="0.5"/>
+
+
+
+            <TextView
+                android:text="@string/RelacionPrecioCalidad"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/qualityPriceString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/qpRB"
+                android:rating ="0.5"/>
+
+            <TextView
+                android:text="@string/Confort"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confortString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confortRB"
+                android:rating ="0.5" />
+
+            <TextView
+                android:text="@string/General"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/generalString" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/generalRB"
+                android:isIndicator="true"
+                android:rating ="0.5"/>
+
+            <TextView
+                android:text="@string/LoRecomendariasAotro"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recomendariasString" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checkedButton="@+id/YesRB"
+                android:orientation="horizontal"
+                android:id="@+id/yesnoRG">
+
+                <RadioButton
+                    android:text="@string/Si"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/YesRB"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:text="@string/No"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/NoRB" />
+
+            </RadioGroup>
+
+            <TextView
+                android:text="@string/Comentarios"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/comentariosString"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions"
+                android:ems="10"
+                android:id="@+id/comentariosET"
+                android:maxLength="256"
+                />
+
+            <Button
+                android:text="@string/Enviar"
+                android:layout_width="138dp"
+                android:layout_height="70dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="100dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorTeal"
+                android:id="@+id/sendButton" />
+
+            />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

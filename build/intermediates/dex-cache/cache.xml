@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_de0aef1b3d1b1820f7ed541aa4e1658f1856d0fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.0_5b5af66565ece481997f95340a0c1b60a430eebd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.0_40b7f15da215a008ce7a51b183d61e6fb2a4ec97.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_acf4ed2976d7639cee4aa625f0713f3bfeee55da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.0_241d4a26ea5c704309ddb9649224ba97bc77df9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.0_fe653bd499caf3b86d7e57ce12effc0d16ebbfb4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5e497d60f0cb6ce87c458ac5420a46d0fed49bd0">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.0_a26635646468007a5d40e6c6149596042380b6e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.0.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4022261eeea0d92eb2997a68d2c1f084a16abad9">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-9.0.2_d612f624c939fed4321ead18de8d2119956ea59c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9919563cffd8e3732e944d3c437d4b9575a08448">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-9.0.2_e43906987c16ea438ee960d80a6fe4d02fb5ffa6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.0/support-annotations-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.0_72329eff4d09d5c3764f0f1e2dd51be87b0a0da3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.0_8987841c5adf4ea2b837d7ad3be1ab00bf2b6f12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.0_74f20c72fd9a89dfec3e97683bf1bee50d5cd5f0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_cd23138ccfea439d35d0ba0a7f47de06a9861414.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.0.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="aec1bc54964a85d851c2c1b1cb7f90f7dbd755ab">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.0.2_e5de99f709668c64258b11697896eab5832d774f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4b868b833b0887aa48c4e581558eef4f1196f6a2">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-1.2.1_7a16bb2179ea2e483b82f400a5a1ef14e2e1b986.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_c89d929111532fb302a735ca9cee1f7b63469594.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.0.0_248faf23df987c27d46c10374eb9aef36bff3018.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.0_3a9ac140bcd897c143ca58fd7d0ecda4ca096a81.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.0.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="20e1a0f0de6276a5f36062b655f8b20f8cc00cc4">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-maps-9.0.2_e84827e62bf0d507aa2aa57495be5ccc48b21881.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.4/695b63d702f505b9b916e02272e3b6381bade7f/gson-2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0695b63d702f505b9b916e02272e3b6381bade7f">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/gson-2.4_eb38a5733155e5b42899cddffe37a78c3e0c82de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.0_cc08c57143f31698b25ce8721f83a8b98bceec48.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_c3d9db4f0bc7324782e23aa9d377cc3a2f71b5e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="94d9cedd04b124aed044ac71c451a292856d854c">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.0.2_52d8b09cead3a7d9216c7befb650d5403a7235e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.0_18b0e6c2a6aa0c4935bd94274283345f7e184614.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.0_b586a44e97a9fd336b229de25c6fa5aa5c0db6ea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_71ce58347b9182b4e1f10b974b2502ea81171196.jar" />
+    </item>
+
+</items>
