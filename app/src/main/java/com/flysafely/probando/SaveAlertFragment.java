@@ -87,7 +87,7 @@ public class SaveAlertFragment extends Fragment {
                                         editor.apply();
                                     }
 
-                                    MainActivity.AddtoBackStack(new SaveAlertFragment(), getString(R.string.title_fragment_addalert));
+                                    MainActivity.AddtoBackStack(new ListAlertFragment(), getString(R.string.title_fragment_alerts));
 
                                 }
                             }

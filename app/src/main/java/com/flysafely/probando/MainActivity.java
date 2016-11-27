@@ -525,8 +525,14 @@ public class MainActivity extends AppCompatActivity {
                 /* si el index es 1 significa que al presionar back, vamos a estar en el home.
                     Y en el home no debería haber ningun elemento remarcado de las opciones del drawer.
                  */
-                if (index > 1) {
-                    previousHighlighted = popSelectedDrawerOptions();
+                if (index > 1 ) {
+
+                    if (previousTitle == alerts_add_title || previousTitle == alerts_detail_title) {
+                        previousHighlighted = ALERTS_POSITION - 1;
+                    }
+                    else
+                        previousHighlighted = popSelectedDrawerOptions();
+
                     getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
                 }
 
