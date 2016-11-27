@@ -3,6 +3,8 @@ package com.flysafely.probando;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -25,7 +27,6 @@ import org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.zip.Inflater;
 
 /**
  * Created by Administrador on 17/11/2016.
@@ -33,15 +34,70 @@ import java.util.zip.Inflater;
 
 public class DetailAlertFragment extends Fragment {
 
-    private View parent;
+    private static final String STATUS_DETAIL = "status";
+    private static final String STATUS_COLOR = "status_color";
+    private static final String DEPARTURE_DETAIL = "departure";
+    private static final String HDEPARTURE_DETAIL = "hdeparture";
+    private static final String TDEP_DETAIL = "tdep";
+    private static final String GDEP_DETAIL = "gdep";
+    private static final String ARRIVAL_DETAIL = "arrival";
+    private static final String HARR_DETAIL = "harr";
+    private static final String TARR_DETAIL = "tarr";
+    private static final String GARR_DETAIL = "garr";
+    private static final String BAGARR_DETAIL = "bagarr";
+
+
     private Flight displayedFlight;
     private String serializedFlight;
     private String airlineCode, flightNumber;
+
+    TextView status;
+    int color;
+    TextView departure;
+    TextView hourDeparture;
+    TextView terminalDep;
+    TextView gateDep;
+    TextView arrival;
+    TextView hourArr;
+    TextView terminalArr;
+    TextView gateArr;
+    TextView baggageGateArr;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        switch (getResources().getConfiguration().orientation) {
+
+            case Configuration.ORIENTATION_LANDSCAPE:
+                return inflater.inflate(R.layout.fragment_status_alert_rotated, null);
+
+            default:
+                return inflater.inflate(R.layout.fragment_status_alert, null);
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
+
+        status = (TextView) getView().findViewById(R.id.textView_state_detail_alert);
+        departure = (TextView) getView().findViewById(R.id.textView_departure_detail_alert);
+        hourDeparture = (TextView) getView().findViewById(R.id.textView_hourDep_detail_alert);
+        terminalDep = (TextView) getView().findViewById(R.id.textView_terminalDep_detail_alert);
+        gateDep = (TextView) getView().findViewById(R.id.textView_gateDep_detail_alert);
+        arrival = (TextView) getView().findViewById(R.id.textView_arrival_detail_alert);
+        hourArr = (TextView) getView().findViewById(R.id.textView_hourArr_detail_alert);
+        terminalArr = (TextView) getView().findViewById(R.id.textView_terminalArr_detail_alert);
+        gateArr = (TextView) getView().findViewById(R.id.textView_gateArr_detail_alert);
+        baggageGateArr = (TextView) getView().findViewById(R.id.textView_baggateGateArr_detail_alert);
+
 
         if(savedInstanceState == null) {
             Bundle
@@ -53,22 +109,46 @@ public class DetailAlertFragment extends Fragment {
             } else {
                 airlineCode= args.getString("AIRLINE");
                 flightNumber= args.getString("FLIGHT_NUMBER");
+
             }
+
+            getFlightStatus(airlineCode, flightNumber);
         }
         else {
             airlineCode = (String) savedInstanceState.getSerializable("AIRLINE");
             flightNumber = (String) savedInstanceState.getSerializable("FLIGHT_NUMBER");
+            status.setText(savedInstanceState.getString(STATUS_DETAIL));
+            color = savedInstanceState.getInt(STATUS_COLOR);
+            status.setTextColor(color);
+            departure.setText(savedInstanceState.getString(DEPARTURE_DETAIL));
+            hourDeparture.setText(savedInstanceState.getString(HDEPARTURE_DETAIL));
+            terminalDep.setText(savedInstanceState.getString(TDEP_DETAIL));
+            gateDep.setText(savedInstanceState.getString(GDEP_DETAIL));
+            arrival.setText(savedInstanceState.getString(ARRIVAL_DETAIL));
+            hourArr.setText(savedInstanceState.getString(HARR_DETAIL));
+            terminalArr.setText(savedInstanceState.getString(TARR_DETAIL));
+            gateArr.setText(savedInstanceState.getString(GARR_DETAIL));
+            baggageGateArr.setText(savedInstanceState.getString(BAGARR_DETAIL));
+
         }
 
-        getFlightStatus(airlineCode, flightNumber);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parent =  inflater.inflate(R.layout.fragment_status_alert, null);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-        return parent;
+        outState.putString(STATUS_DETAIL, status.getText().toString());
+        outState.putInt(STATUS_COLOR, color);
+        outState.putString(DEPARTURE_DETAIL, departure.getText().toString());
+        outState.putString(HDEPARTURE_DETAIL, hourDeparture.getText().toString());
+        outState.putString(TDEP_DETAIL, terminalDep.getText().toString());
+        outState.putString(GDEP_DETAIL, gateDep.getText().toString());
+        outState.putString(ARRIVAL_DETAIL, arrival.getText().toString());
+        outState.putString(HARR_DETAIL, hourArr.getText().toString());
+        outState.putString(TARR_DETAIL, terminalArr.getText().toString());
+        outState.putString(GARR_DETAIL, gateArr.getText().toString());
+        outState.putString(BAGARR_DETAIL, baggageGateArr.getText().toString());
+
     }
 
     private void deleteFlight(String airlaneCode, String flightNumber) {
@@ -184,20 +264,10 @@ public class DetailAlertFragment extends Fragment {
         serializedFlight = data.toString();
         displayedFlight = gson.fromJson(serializedFlight, Flight.class);
 
-        TextView status = (TextView) parent.findViewById(R.id.textView_state_detail_alert);
-        TextView departure = (TextView) parent.findViewById(R.id.textView_departure_detail_alert);
-        TextView hourDeparture = (TextView) parent.findViewById(R.id.textView_hourDep_detail_alert);
-        TextView terminalDep = (TextView) parent.findViewById(R.id.textView_terminalDep_detail_alert);
-        TextView gateDep = (TextView) parent.findViewById(R.id.textView_gateDep_detail_alert);
-        TextView arrival = (TextView) parent.findViewById(R.id.textView_arrival_detail_alert);
-        TextView hourArr = (TextView) parent.findViewById(R.id.textView_hourArr_detail_alert);
-        TextView terminalArr = (TextView) parent.findViewById(R.id.textView_terminalArr_detail_alert);
-        TextView gateArr = (TextView) parent.findViewById(R.id.textView_gateArr_detail_alert);
-        TextView baggateGateArr = (TextView) parent.findViewById(R.id.textView_baggateGateArr_detail_alert);
-
         if(displayedFlight.getStatus() != null) {
             status.setText(Converter.getStatus(getActivity(), displayedFlight.getStatus()));
-            status.setTextColor(Converter.statusColor(displayedFlight.getStatus()));
+            color = Converter.statusColor(displayedFlight.getStatus());
+            status.setTextColor(color);
         } else {
             status.setText("-");
         }
@@ -246,9 +316,9 @@ public class DetailAlertFragment extends Fragment {
             gateArr.setText("-");
         }
         if(displayedFlight.getArrival().getAirport().getBaggage() != null){
-            baggateGateArr.setText(displayedFlight.getArrival().getAirport().getBaggage());
+            baggageGateArr.setText(displayedFlight.getArrival().getAirport().getBaggage());
         } else {
-            baggateGateArr.setText("-");
+            baggageGateArr.setText("-");
         }
 
         return;

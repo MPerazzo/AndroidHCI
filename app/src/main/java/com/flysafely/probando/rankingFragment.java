@@ -95,6 +95,8 @@ public class rankingFragment extends Fragment {
     private ArrayList<String> airlinesTags;
 
     private ProgressDialog progressDialog;
+    private ProgressDialog progressDialogSend;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -504,6 +506,10 @@ public class rankingFragment extends Fragment {
      @Override
      protected void onPreExecute() {
          sendButton.setEnabled(false);
+         progressDialog = new ProgressDialog(getActivity());
+         progressDialog.setMessage(getActivity().getString(R.string.sending_calificate));
+         progressDialog.setCancelable(false);
+         progressDialog.show();
      }
 
      @Override

@@ -1,49 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <TextView
-        android:text="@string/airlane_code_label"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:id="@+id/aerolineaString" />
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText_AirlaneCode" />
+        <TextView
+            android:text="@string/flight_numbre_label"
+            android:textSize="18dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nVueloString" />
 
-    <TextView
-        android:text="@string/flight_numbre_label"
-        android:layout_marginLeft="5dp"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nVueloString" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText_FlightNumber" />
 
-    <EditText
-        android:layout_width="match_parent"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText_FlightNumber"/>
+        android:orientation="vertical"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignStart="@+id/linearLayout2">
+
+
+
+        <TextView
+            android:text="@string/airlane_code_label"
+            android:textSize="18dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/aerolineaString" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editText_AirlaneCode" />
+    </LinearLayout>
+
 
     <Button
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="90dp"
+
         android:text="@string/save_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
+        android:layout_height="36dp"
+        android:background="@color/colorTeal"
+        android:textColor="@color/colorWhite"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textSize="18sp"
         android:id="@+id/save_button"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp" />
 
-        />
-</LinearLayout>
+
+
+</RelativeLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:paddingTop="16dp"-->
+    <!--android:paddingBottom="16dp"-->
+    <!--android:layout_marginLeft="10dp">-->
+
+    <!--<TextView-->
+    <!--android:text="@string/airlane_code_label"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:textSize="18dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/aerolineaString" />-->
+
+    <!--<EditText-->
+    <!--android:layout_width="240dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:inputType="textPersonName"-->
+    <!--android:ems="10"-->
+    <!--android:id="@+id/editText_AirlaneCode" />-->
+
+    <!--<TextView-->
+    <!--android:text="@string/flight_numbre_label"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:textSize="18dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/nVueloString" />-->
+
+    <!--<EditText-->
+    <!--android:layout_width="240dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:inputType="number"-->
+    <!--android:ems="10"-->
+    <!--android:id="@+id/editText_FlightNumber"/>-->
+
+    <!--<Button-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_gravity="end|right"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:background="@color/colorTeal"-->
+    <!--android:text="@string/save_button"-->
+    <!--android:textSize="18sp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="36dp"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:id="@+id/save_button"-->
+
+    <!--/>-->
+    <!--</LinearLayout>-->

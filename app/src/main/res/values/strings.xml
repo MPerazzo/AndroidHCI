@@ -58,6 +58,7 @@
     <string name="flightnumber_error">Numero de vuelo invalido</string>
     <string name="error_succeed">Su formulario ha sido enviado exitosamente</string>
     <string name="error_minRating">El valor mínimo posible es media estrella.</string>
+    <string name="sending_calificate"> Sending review, please wait.. </string>
 
     <!--database-->
     <string name="database_connection_failed"> Error de conexión con el servidor, intente nuevamente en breve </string>
@@ -79,7 +80,7 @@
     <string name="flight_numbre_label">Flight number</string>
     <string name="save_button">Save</string>
     <string name="fields_incomplete_msg">You must complete all the fields.</string>
-    <string name="invalid_flight">Flight not found.</string>
+    <string name="invalid_flight">Flight not found. Verificate if bouth fields are correct.</string>
     <string name="conection_error">Check your internet connection.</string>
     <string name="request_error">Error in the search.</string>
     <string name="state_text">State: </string>
@@ -114,6 +115,7 @@
     <string name="ten_minute_text">ten minutes</string>
     <string name="thirty_minute_text">thirty minutes</string>
     <string name="one_hour_text">one hour</string>
+    <string name="sending_alerts"> Retreaving flight information, please wait... </string>
 
     <!--GOOGLE API KEY-->
     <string name="GOOGLE_API_KEY">AIzaSyCjr_dEpndv2sb7_ZRKfquScf-VmuVgT9s</string>

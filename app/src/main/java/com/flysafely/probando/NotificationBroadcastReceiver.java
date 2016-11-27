@@ -238,9 +238,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         String airlane = newFlight.getAirline().getId();
         Integer flightNumber = newFlight.getNumber();
         Intent notificationIntent = new Intent(context, MainActivity.class);
-        //notificationIntent.putExtra("mainFragment", "flightStatusFragment");
-        //notificationIntent.putExtra("AIRLINE",airlane);
-        //notificationIntent.putExtra("FLIGHT_NUMBER",flightNumber.toString());
+        notificationIntent.putExtra("mainFragment", "detailAlertFragment");
+        notificationIntent.putExtra("AIRLINE",airlane);
+        notificationIntent.putExtra("FLIGHT_NUMBER",flightNumber.toString());
 
         android.app.TaskStackBuilder stackBuilder = android.app.TaskStackBuilder.create(context);
 
@@ -254,6 +254,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                 .setContentText(contextText)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo))
                 .setSmallIcon(R.mipmap.logo)
+                .setAutoCancel(true)
                 .setContentIntent(contentIntent);
         NotificationCompat.InboxStyle inboxStyle =
                 new NotificationCompat.InboxStyle();

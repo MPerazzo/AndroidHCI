@@ -4,13 +4,19 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.text.Selection;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,14 +40,22 @@ import java.util.Set;
 
 public class SaveAlertFragment extends Fragment {
 
-    View parent;
+    private View parent;
+    private EditText airlaneInput;
+    private EditText flightNumberInput;
+    private ProgressDialog progressDialog;
+    private boolean airlineCompleted;
+    private boolean flightCompleted;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parent = inflater.inflate(R.layout.fragment_save_alert, null);
 
-        final EditText airlaneInput = (EditText) parent.findViewById(R.id.editText_AirlaneCode);
-        final EditText flightNumberInput = (EditText) parent.findViewById(R.id.editText_FlightNumber);
+        airlineCompleted= false;
+        flightCompleted = false;
+
+        airlaneInput = (EditText) parent.findViewById(R.id.editText_AirlaneCode);
+        flightNumberInput = (EditText) parent.findViewById(R.id.editText_FlightNumber);
 
         Button search = (Button) parent.findViewById(R.id.save_button);
 
@@ -51,6 +65,11 @@ public class SaveAlertFragment extends Fragment {
                 public void onClick(View v) {
 
                     if (validData()) {
+
+                        progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setMessage(getActivity().getString(R.string.sending_alerts));
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
 
                         String url = "http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airlaneInput.getText().toString() + "&flight_number=" + flightNumberInput.getText().toString();
 
@@ -87,6 +106,15 @@ public class SaveAlertFragment extends Fragment {
                                         editor.apply();
                                     }
 
+                                    airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorTeal, null), PorterDuff.Mode.SRC_ATOP);
+                                    flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorTeal, null), PorterDuff.Mode.SRC_ATOP);
+
+                                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(airlaneInput.getWindowToken(), 0);
+                                    imm.hideSoftInputFromWindow(flightNumberInput.getWindowToken(), 0);
+
+                                    progressDialog.dismiss();
+
                                     MainActivity.AddtoBackStack(new ListAlertFragment(), getString(R.string.title_fragment_alerts));
 
                                 }
@@ -99,7 +127,27 @@ public class SaveAlertFragment extends Fragment {
                         });
                         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
                     } else {
-                        Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
+
+                        if (!airlineCompleted && !flightCompleted) {
+                            Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
+                            airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+                            flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+                        }
+
+                        else if (!airlineCompleted) {
+                            Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
+                            airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+
+                        }
+
+                        else {
+                            Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
+                            flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+
+                        }
+
+                        Selection.setSelection(airlaneInput.getText(), airlaneInput.getSelectionStart());
+
                     }
                 }
             });
@@ -110,33 +158,46 @@ public class SaveAlertFragment extends Fragment {
 
     private boolean validData() {
 
-        final EditText airlaneInput = (EditText) parent.findViewById(R.id.editText_AirlaneCode);
-        final EditText flightNumberInput = (EditText) parent.findViewById(R.id.editText_FlightNumber);
-
         if(airlaneInput.getText().toString().equals("")) {
-            return false;
+            airlineCompleted = false;
         }
-        if(flightNumberInput.getText().toString().equals("")) {
-            return false;
-        }
+        else
+            airlineCompleted = true;
 
-        return true;
+        if(flightNumberInput.getText().toString().equals("")) {
+            flightCompleted = false;
+        }
+        else
+            flightCompleted = true;
+
+        return airlineCompleted && flightCompleted;
     }
     private void displayError(int error) {
         int
                 errorMsg;
 
         switch (error) {
+
             case 0:
+
                 errorMsg = R.string.invalid_flight;
+                Selection.setSelection(airlaneInput.getText(), airlaneInput.getSelectionStart());
+                airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+                flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
                 break;
+
             case 1:
+
                 errorMsg = R.string.conection_error;
                 break;
+
             default:
+
                 errorMsg = R.string.request_error;
+
         }
 
+        progressDialog.dismiss();
         Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_LONG).show();
     }
 }
