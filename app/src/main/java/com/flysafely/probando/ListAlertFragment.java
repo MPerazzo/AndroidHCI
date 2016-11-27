@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,8 +61,8 @@ public class ListAlertFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
 
@@ -73,15 +74,15 @@ public class ListAlertFragment extends Fragment {
 
         FloatingActionButton button = (FloatingActionButton) parent.findViewById(R.id.add_alert);
         if(button != null) {
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(actionMode != null) {
                         actionMode.finish();
                     }
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.content_frame, new SaveAlertFragment()).commit();
 
+                    MainActivity.AddtoBackStack(new SaveAlertFragment(), getString(R.string.title_fragment_addalert));
                 }
             });
         }
@@ -97,9 +98,8 @@ public class ListAlertFragment extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Fragment detailAlertFragment = new DetailAlertFragment();
 
-                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        Fragment detailAlertFragment = new DetailAlertFragment();
 
                         Bundle args = new Bundle();
                         Flight flight = (Flight)parent.getAdapter().getItem(position);
@@ -108,7 +108,7 @@ public class ListAlertFragment extends Fragment {
                         args.putString("FLIGHT_NUMBER",flight.getNumber().toString());
                         detailAlertFragment.setArguments(args);
 
-                        fragmentTransaction.replace(R.id.content_frame, detailAlertFragment).commit();
+                        MainActivity.AddtoBackStack(detailAlertFragment, getString(R.string.title_fragment_detailalert));
                     }
                 });
 
@@ -271,8 +271,11 @@ public class ListAlertFragment extends Fragment {
             RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
         }
         else {
-            SharedPreferences
-                    settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+            if ( !isAdded() || getActivity() == null)
+                return;
+
+            SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
 
             SharedPreferences.Editor editor = settings.edit();
             if(updatedFavorites!=null) {

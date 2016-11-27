@@ -5,7 +5,8 @@
     <string name="title_fragment_main" translatable="false">FlySafely</string>
     <string name="title_fragment_offers">Ofertas</string>
     <string name="title_fragment_alerts">Alertas</string>
-    <string name="title_fragment_listalerts">ListaAlertas</string>
+    <string name="title_fragment_addalert">AgregarAlertas</string>
+    <string name="title_fragment_detailalert">DetalleAlertas</string>
     <string name="title_fragment_califications">Calificaciones</string>
     <string name="title_fragment_settings">Configuración</string>
 

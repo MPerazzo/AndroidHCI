@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private String offers_title;
     private String califications_title;
     private String configuration_title;
+    private String alerts_add_title;
+    private String alerts_detail_title;
 
     /* usada para resaltar las opciones que fueron seleccionadas previamente en el drawer (no contiene la actual)
        donde el int representa la posición del elemento en la lista. Declarado como ArrayList para serializarlo.
@@ -99,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         //Obtener los strings desde los recursos para el drawer
         home_title = getString(R.string.app_name);
         alerts_title = getString(R.string.title_fragment_alerts);
+        alerts_add_title = getString(R.string.title_fragment_addalert);
+        alerts_detail_title = getString(R.string.title_fragment_detailalert);
         offers_title = getString(R.string.title_fragment_offers);
         califications_title = getString(R.string.title_fragment_califications);
         configuration_title = getString(R.string.title_fragment_settings);
@@ -387,7 +391,8 @@ public class MainActivity extends AppCompatActivity {
 
             case ALERTS_POSITION:
 
-                backStackAdd(new SaveAlertFragment(), alerts_title);
+                backStackAdd(new ListAlertFragment(), alerts_title);
+                setActionBarTitle(alerts_title);
                 infoItem.setVisible(false);
 
                 break;
@@ -395,6 +400,7 @@ public class MainActivity extends AppCompatActivity {
             case OFFERS_POSITION:
 
                 backStackAdd(new OffersFragment(), offers_title);
+                setActionBarTitle(offers_title);
                 infoItem.setVisible(true);
 
                 break;
@@ -410,6 +416,9 @@ public class MainActivity extends AppCompatActivity {
             case CONFIGURATION_POSITION:
 
                 backStackAdd(new SettingsFragment(), configuration_title);
+                setActionBarTitle(configuration_title);
+                infoItem.setVisible(false);
+
                 break;
         }
 
@@ -468,6 +477,8 @@ public class MainActivity extends AppCompatActivity {
 
             int index = getFragmentManager().getBackStackEntryCount() - 1;
 
+            Log.e("$$$$iINDEX", "ES" + index);
+
             /* Estamos en el home y queremos irnos de la app. Se handlea aca y se retorna porque
             si llamamos a super queda la aplicación sin ningun frgamento, sin layout. (solo con toolbar
             y drawer)
@@ -480,44 +491,51 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            super.onBackPressed();
-
             /* el fragmento que esta en focus fue removido al presionar back, calculamos el nombre del fragmento
             actual para colocar su nombre en la action bar. Volvemos a restar menos 1.
              */
 
-            String title = getTopStackName(index-1);
-            setActionBarTitle(title);
+            String currentTitle = getTopStackName(index);
 
-            if (title.equals(offers_title)) {
-                infoItem.setVisible(true);
+            String previousTitle = getTopStackName(index - 1);
+
+            super.onBackPressed();
+
+            // estos fragmentos no modifican el highlight dado que ocurren dentro de una misma categoría
+            if (currentTitle != alerts_add_title && currentTitle != alerts_detail_title) {
+
+                if (previousTitle.equals(offers_title)) {
+                    infoItem.setVisible(true);
+                } else {
+                    infoItem.setVisible(false);
+                }
+
+
+                int previousHighlighted = -1;
+
+                // actualizamos el elemento remarcado de las opciones del drawer
+
+                if (!selectedDrawerOptions.isEmpty())
+                    currentHighlighted = popSelectedDrawerOptions();
+
+                if (currentHighlighted != -1)
+                    getViewByPosition(currentHighlighted).setBackgroundColor(Color.TRANSPARENT);
+
+
+                /* si el index es 1 significa que al presionar back, vamos a estar en el home.
+                    Y en el home no debería haber ningun elemento remarcado de las opciones del drawer.
+                 */
+                if (index > 1) {
+                    previousHighlighted = popSelectedDrawerOptions();
+                    getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
+                }
+
+
+                currentHighlighted = previousHighlighted;
             }
-            else {
-                infoItem.setVisible(false);
-            }
 
+            setActionBarTitle(previousTitle);
 
-            int previousHighlighted = -1;
-
-            // actualizamos el elemento remarcado de las opciones del drawer
-
-            if (!selectedDrawerOptions.isEmpty())
-                currentHighlighted = popSelectedDrawerOptions();
-
-            if (currentHighlighted != -1)
-                getViewByPosition(currentHighlighted).setBackgroundColor(Color.TRANSPARENT);
-
-
-            /* si el index es 1 significa que al presionar back, vamos a estar en el home.
-                Y en el home no debería haber ningun elemento remarcado de las opciones del drawer.
-             */
-            if (index > 1) {
-                previousHighlighted = popSelectedDrawerOptions();
-                getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
-            }
-
-
-            currentHighlighted = previousHighlighted;
         }
     }
 
