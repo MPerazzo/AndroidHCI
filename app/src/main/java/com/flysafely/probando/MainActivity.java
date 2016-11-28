@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                showDrawerToggle();
+
                 actionBarHomeButton.setEnabled(false);
 
                 backStackAdd(new MainFragment(), home_title);
@@ -328,14 +330,7 @@ public class MainActivity extends AppCompatActivity {
 
                 detailAlertFragment.setArguments(args);
 
-
-                fragmentManager.beginTransaction().add(R.id.content_frame, new MainFragment(), home_title).addToBackStack(home_title);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, detailAlertFragment, "Alertas").addToBackStack("Alertas").commit();
-
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.content_frame, new MainFragment(), home_title).addToBackStack(home_title);
-//                fragmentTransaction.replace(R.id.content_frame, new ListAlertFragment(), "Alertas").addToBackStack("Alertas");
-//                fragmentTransaction.replace(R.id.content_frame, detailAlertFragment, alerts_detail_title).addToBackStack(alerts_detail_title).commit();
+                MainFragment.finishProgressDialog();
                 selectedDrawerOptions.add(ALERTS_POSITION - 1);
                 currentHighlighted = ALERTS_POSITION - 1;
             }
@@ -533,18 +528,17 @@ public class MainActivity extends AppCompatActivity {
 
             String previousTitle = getTopStackName(index - 1);
 
+            if (previousTitle.equals(offers_title)) {
+                infoItem.setVisible(true);
+            } else {
+                infoItem.setVisible(false);
+            }
+
             if (currentTitle == alerts_add_title || currentTitle == alerts_detail_title)
                 showDrawerToggle();
 
             // estos fragmentos no modifican el highlight dado que ocurren dentro de una misma categoría
             if (currentTitle != alerts_add_title && currentTitle != alerts_detail_title) {
-
-                if (previousTitle.equals(offers_title)) {
-                    infoItem.setVisible(true);
-                } else {
-                    infoItem.setVisible(false);
-                }
-
 
                 int previousHighlighted = -1;
 

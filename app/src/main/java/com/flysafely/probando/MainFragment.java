@@ -7,7 +7,9 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,7 @@ public class MainFragment extends Fragment {
 
     private static final int CANT_OFFERS = 3;
 
-    private ProgressDialog progressDialog;
+    private static ProgressDialog progressDialog;
 
     private TextView mainText;
 
@@ -263,4 +265,8 @@ public class MainFragment extends Fragment {
             progressDialog.dismiss();
     }
 
+    public static void finishProgressDialog() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
+    }
 }

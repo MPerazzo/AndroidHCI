@@ -324,7 +324,8 @@ public class DetailAlertFragment extends Fragment {
                 errorMsg = R.string.request_error;
         }
 
-        Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_LONG).show();
+        if (isAdded() && getActivity()!= null)
+            Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_LONG).show();
     }
 
     public boolean deleteFlight() {

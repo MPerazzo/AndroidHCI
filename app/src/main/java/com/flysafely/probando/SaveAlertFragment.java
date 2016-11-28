@@ -51,6 +51,7 @@ public class SaveAlertFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parent = inflater.inflate(R.layout.fragment_save_alert, null);
 
+        MainActivity.setActionBarTitle(getString(R.string.title_fragment_addalert));
         MainActivity.showUpButton();
 
         airlineCompleted= false;
@@ -134,21 +135,20 @@ public class SaveAlertFragment extends Fragment {
                             Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
                             airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
                             flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
+                            Selection.setSelection(airlaneInput.getText(), airlaneInput.getSelectionStart());
                         }
 
                         else if (!airlineCompleted) {
                             Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
                             airlaneInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
-
+                            Selection.setSelection(airlaneInput.getText(), airlaneInput.getSelectionStart());
                         }
 
                         else {
                             Toast.makeText(getActivity(), R.string.fields_incomplete_msg, Toast.LENGTH_LONG).show();
                             flightNumberInput.getBackground().mutate().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorRed, null), PorterDuff.Mode.SRC_ATOP);
-
+                            Selection.setSelection(flightNumberInput.getText(), airlaneInput.getSelectionStart());
                         }
-
-                        Selection.setSelection(airlaneInput.getText(), airlaneInput.getSelectionStart());
 
                     }
                 }

@@ -87,7 +87,6 @@ public class ListAlertFragment extends Fragment {
                     }
 
                     MainActivity.AddtoBackStack(new SaveAlertFragment(), getString(R.string.title_fragment_addalert));
-                    MainActivity.setActionBarTitle(getString(R.string.title_fragment_addalert));
                 }
             });
         }
