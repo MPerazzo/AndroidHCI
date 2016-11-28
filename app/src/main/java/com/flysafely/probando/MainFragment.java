@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
 
             if (listView == null || offerArray == null || !isAdded() || getActivity() == null)
                 return;
-            listView.   setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
+            listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
             return;
         }
 
@@ -269,4 +269,5 @@ public class MainFragment extends Fragment {
         if (progressDialog != null)
             progressDialog.dismiss();
     }
+
 }

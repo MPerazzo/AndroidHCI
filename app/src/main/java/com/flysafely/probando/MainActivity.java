@@ -330,6 +330,10 @@ public class MainActivity extends AppCompatActivity {
 
                 detailAlertFragment.setArguments(args);
 
+
+                backStackAdd(new MainFragment(), home_title);
+                backStackAdd(new ListAlertFragment(), alerts_title);
+                backStackAdd(detailAlertFragment, alerts_detail_title);
                 MainFragment.finishProgressDialog();
                 selectedDrawerOptions.add(ALERTS_POSITION - 1);
                 currentHighlighted = ALERTS_POSITION - 1;
