@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private String offers_title;
     private String califications_title;
     private String configuration_title;
-    private String alerts_add_title;
-    private String alerts_detail_title;
+    private static String alerts_add_title;
+    private static String alerts_detail_title;
 
     /* usada para resaltar las opciones que fueron seleccionadas previamente en el drawer (no contiene la actual)
        donde el int representa la posición del elemento en la lista. Declarado como ArrayList para serializarlo.
@@ -61,21 +62,19 @@ public class MainActivity extends AppCompatActivity {
 
     private int currentHighlighted;
 
-    private DrawerLayout drawerLayout;
+    private  static DrawerLayout drawerLayout;
 
-    private ListView drawerList;
+    private  static ListView drawerList;
 
-    private Toolbar toolbar;
+    private static Toolbar toolbar;
 
     private static TextView actionBarText;
 
     private static ImageView actionBarHomeButton;
 
-    private ActionBarDrawerToggle drawerToggle;
+    private static ActionBarDrawerToggle drawerToggle;
 
     private static FragmentManager fragmentManager;
-
-    private boolean upIsActive = false;
 
     private static GPSTracker tracker;
 
@@ -88,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean popUpMapVisible;
 
     private Bundle bundle;
+
+    private static String detailAlertBarTitle;
+
+    private static ActionBar supportActionBar;
+
+    private static boolean upIsActive;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -216,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* el color coincide con el background del popUp y posibilita el backpressed listener.
         Tmabién otorga la posibilidad de que se cierre el popup al tocar la pantalla fuera de su recuadro,
-        lo cuál resulta práctico y útil para el usuario.
+        lo cuál resulta práctico ystatus.getText().toString() útil para el usuario.
          */
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
@@ -257,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
         View header;
 
         fragmentManager = getFragmentManager();
+
+        supportActionBar = getSupportActionBar();
 
         // inflate header depending on orientation
         switch (getResources().getConfiguration().orientation) {
@@ -350,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar_items, menu);
 
-        infoItem = menu.findItem(R.id.action_search);
+        infoItem = menu.findItem(R.id.action_popup);
         infoItem.setVisible(false);
 
         return true;
@@ -360,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
-            case R.id.action_search:
+            case R.id.action_popup:
 
 
                     if (popUpMapVisible == true)
@@ -422,13 +429,13 @@ public class MainActivity extends AppCompatActivity {
             case ALERTS_POSITION:
 
                 backStackAdd(new ListAlertFragment(), alerts_title);
-                setActionBarTitle(alerts_title);
                 infoItem.setVisible(false);
 
                 break;
 
             case OFFERS_POSITION:
 
+                showDrawerToggle();
                 backStackAdd(new OffersFragment(), offers_title);
                 setActionBarTitle(offers_title);
                 infoItem.setVisible(true);
@@ -437,6 +444,7 @@ public class MainActivity extends AppCompatActivity {
 
             case CALIFICATIONS_POSTION:
 
+                showDrawerToggle();
                 backStackAdd(new rankingFragment(), califications_title);
                 setActionBarTitle(califications_title);
                 infoItem.setVisible(false);
@@ -445,6 +453,7 @@ public class MainActivity extends AppCompatActivity {
 
             case CONFIGURATION_POSITION:
 
+                showDrawerToggle();
                 backStackAdd(new SettingsFragment(), configuration_title);
                 setActionBarTitle(configuration_title);
                 infoItem.setVisible(false);
@@ -500,12 +509,7 @@ public class MainActivity extends AppCompatActivity {
 
         else {
 
-            if (upIsActive) {
-                setupDrawerToggle();
-                upIsActive = false;
-            }
-
-            int index = getFragmentManager().getBackStackEntryCount() - 1;
+            int index = fragmentManager.getBackStackEntryCount() - 1;
 
             Log.e("$$$$iINDEX", "ES" + index);
 
@@ -528,6 +532,9 @@ public class MainActivity extends AppCompatActivity {
             String currentTitle = getTopStackName(index);
 
             String previousTitle = getTopStackName(index - 1);
+
+            if (currentTitle == alerts_add_title || currentTitle == alerts_detail_title)
+                showDrawerToggle();
 
             // estos fragmentos no modifican el highlight dado que ocurren dentro de una misma categoría
             if (currentTitle != alerts_add_title && currentTitle != alerts_detail_title) {
@@ -557,9 +564,13 @@ public class MainActivity extends AppCompatActivity {
 
                     if (previousTitle == alerts_add_title || previousTitle == alerts_detail_title) {
                         previousHighlighted = ALERTS_POSITION - 1;
+
+                        if (previousTitle == alerts_detail_title)
+                            previousTitle = detailAlertBarTitle;
                     }
-                    else
+                    else {
                         previousHighlighted = popSelectedDrawerOptions();
+                    }
 
                     getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
                 }
@@ -632,20 +643,19 @@ public class MainActivity extends AppCompatActivity {
         return drawerList.getChildAt(wantedChild);
     }
 
-        private void setupToolbar(){
+
+    private void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolBar);
 
         setSupportActionBar(toolbar);
-//      getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    private void setupUpButton() {
+    public static void showUpButton() {
 
         drawerToggle.setDrawerIndicatorEnabled(false);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        upIsActive = true;
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
 
         backListener();
 
@@ -657,19 +667,38 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
     }
 
-    private void backListener() {
+    public static void showDrawerToggle() {
+
+        supportActionBar.setDisplayHomeAsUpEnabled(false);
+        drawerToggle.setDrawerIndicatorEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                drawerLayout.openDrawer(drawerList);
             }
         });
 
     }
 
-    private String getTopStackName(int index) {
-        FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(index);
+    private static void backListener() {
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tag = getTopStackName(fragmentManager.getBackStackEntryCount() - 1);
+                setActionBarTitle(tag);
+
+                showDrawerToggle();
+
+                fragmentManager.popBackStack();
+            }
+        });
+
+    }
+
+    private static String getTopStackName(int index) {
+        FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(index);
         return backEntry.getName();
     }
 
@@ -690,6 +719,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setActionBarTitle(String title) {
         actionBarText.setText(title);
+    }
+
+    public static void setDetailAlertBarTitle(String title) {
+        setActionBarTitle(title);
+        detailAlertBarTitle = title;
     }
 
     public static void setHomeTitle() { setActionBarTitle(home_title);}

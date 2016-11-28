@@ -64,6 +64,10 @@ public class ListAlertFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        MainActivity.setActionBarTitle(getString(R.string.title_fragment_alerts));
+
+        MainActivity.showDrawerToggle();
+
         final SharedPreferences settings = getActivity().getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
 
         final Set<String> alerts = settings.getStringSet("ALERTS", null);
@@ -83,6 +87,7 @@ public class ListAlertFragment extends Fragment {
                     }
 
                     MainActivity.AddtoBackStack(new SaveAlertFragment(), getString(R.string.title_fragment_addalert));
+                    MainActivity.setActionBarTitle(getString(R.string.title_fragment_addalert));
                 }
             });
         }

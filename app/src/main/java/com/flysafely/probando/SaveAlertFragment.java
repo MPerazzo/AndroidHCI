@@ -51,6 +51,8 @@ public class SaveAlertFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parent = inflater.inflate(R.layout.fragment_save_alert, null);
 
+        MainActivity.showUpButton();
+
         airlineCompleted= false;
         flightCompleted = false;
 

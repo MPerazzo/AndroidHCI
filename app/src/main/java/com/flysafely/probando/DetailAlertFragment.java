@@ -83,9 +83,10 @@ public class DetailAlertFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        super.onActivityCreated(savedInstanceState);
+        MainActivity.showUpButton();
 
         status = (TextView) getView().findViewById(R.id.textView_state_detail_alert);
         departure = (TextView) getView().findViewById(R.id.textView_departure_detail_alert);
@@ -97,7 +98,11 @@ public class DetailAlertFragment extends Fragment {
         terminalArr = (TextView) getView().findViewById(R.id.textView_terminalArr_detail_alert);
         gateArr = (TextView) getView().findViewById(R.id.textView_gateArr_detail_alert);
         baggageGateArr = (TextView) getView().findViewById(R.id.textView_baggateGateArr_detail_alert);
+    }
 
+    public void onActivityCreated(Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
 
         if(savedInstanceState == null) {
             Bundle
@@ -111,44 +116,24 @@ public class DetailAlertFragment extends Fragment {
                 flightNumber= args.getString("FLIGHT_NUMBER");
 
             }
-
-            getFlightStatus(airlineCode, flightNumber);
         }
+
         else {
-            airlineCode = (String) savedInstanceState.getSerializable("AIRLINE");
-            flightNumber = (String) savedInstanceState.getSerializable("FLIGHT_NUMBER");
-            status.setText(savedInstanceState.getString(STATUS_DETAIL));
-            color = savedInstanceState.getInt(STATUS_COLOR);
-            status.setTextColor(color);
-            departure.setText(savedInstanceState.getString(DEPARTURE_DETAIL));
-            hourDeparture.setText(savedInstanceState.getString(HDEPARTURE_DETAIL));
-            terminalDep.setText(savedInstanceState.getString(TDEP_DETAIL));
-            gateDep.setText(savedInstanceState.getString(GDEP_DETAIL));
-            arrival.setText(savedInstanceState.getString(ARRIVAL_DETAIL));
-            hourArr.setText(savedInstanceState.getString(HARR_DETAIL));
-            terminalArr.setText(savedInstanceState.getString(TARR_DETAIL));
-            gateArr.setText(savedInstanceState.getString(GARR_DETAIL));
-            baggageGateArr.setText(savedInstanceState.getString(BAGARR_DETAIL));
-
+            airlineCode = savedInstanceState.getString("AIRLINE");
+            flightNumber = savedInstanceState.getString("FLIGHT_NUMBER");
         }
+
+        MainActivity.setDetailAlertBarTitle(airlineCode + " " + flightNumber);
+
+        getFlightStatus(airlineCode, flightNumber);
 
     }
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString(STATUS_DETAIL, status.getText().toString());
-        outState.putInt(STATUS_COLOR, color);
-        outState.putString(DEPARTURE_DETAIL, departure.getText().toString());
-        outState.putString(HDEPARTURE_DETAIL, hourDeparture.getText().toString());
-        outState.putString(TDEP_DETAIL, terminalDep.getText().toString());
-        outState.putString(GDEP_DETAIL, gateDep.getText().toString());
-        outState.putString(ARRIVAL_DETAIL, arrival.getText().toString());
-        outState.putString(HARR_DETAIL, hourArr.getText().toString());
-        outState.putString(TARR_DETAIL, terminalArr.getText().toString());
-        outState.putString(GARR_DETAIL, gateArr.getText().toString());
-        outState.putString(BAGARR_DETAIL, baggageGateArr.getText().toString());
-
+        outState.putString("AIRLINE", airlineCode);
+        outState.putString("FLIGHT_NUMBER", flightNumber);
     }
 
     private void deleteFlight(String airlaneCode, String flightNumber) {
@@ -192,7 +177,7 @@ public class DetailAlertFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_filter){
+        if(id == R.id.action_popup){
             deleteFlight();
             return true;
         }

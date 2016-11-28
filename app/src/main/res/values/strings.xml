@@ -73,6 +73,7 @@
     <string name="map_popup_description_3"> Verde: precios menores a 325 dólares. </string>
     <string name="map_popup_description_4"> Amarillo: precios entre 325 y 600 dólares. </string>
     <string name="map_popup_description_5"> Rojo: precios mayores a 600 dólares. </string>
+    <string name="map_popup_info"> Info </string>
 
     <!--ALERTS AND CONFIG-->
     <string name="action_settings">Settings</string>

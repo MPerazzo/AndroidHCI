@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_popup"
         android:orderInCategory="10"
-        android:title="Search"
+        android:title="@string/map_popup_info"
         android:icon="@drawable/information"
         app:showAsAction="ifRoom"
         android:layout_centerVertical="true"
@@ -14,37 +14,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--<item-->
-        <!--android:id="@+id/action_user"-->
-        <!--android:orderInCategory="20"-->
-        <!--android:title="User"-->
-        <!--android:icon="@drawable/experience"-->
-        <!--app:showAsAction="ifRoom"-->
-        <!--android:layout_centerVertical="true"/>-->
-
 </menu>
-
-
-
-
-
-
-
-<!--<item-->
-<!--android:id="@+id/action_search"-->
-<!--android:orderInCategory="10"-->
-<!--android:title="Search"-->
-<!--android:icon="@drawable/configuracion"-->
-<!--app:showAsAction="ifRoom"-->
-<!--android:layout_centerVertical="true"-->
-<!--android:gravity="center_vertical"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent" />-->
-
-    <!--&lt;!&ndash;<item&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/action_user"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:orderInCategory="20"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:title="User"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:icon="@drawable/experience"&ndash;&gt;-->
-    <!--&lt;!&ndash;app:showAsAction="ifRoom"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_centerVertical="true"/>&ndash;&gt;-->
