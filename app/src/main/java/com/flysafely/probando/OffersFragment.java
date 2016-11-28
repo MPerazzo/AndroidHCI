@@ -4,10 +4,17 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,14 +86,53 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
 
     private Bundle bundle;
 
+    private MenuItem infoItem;
+
+    private PopupWindow popupWindow;
+
+    private View popupView;
+
+    LayoutInflater layoutInflater;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        layoutInflater = inflater;
         return inflater.inflate(R.layout.fragment_offers, null);
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+
+        // set map Popup
+
+        popupView = layoutInflater.inflate(R.layout.maps_popup, null);
+
+        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+
+        popupWindow = new PopupWindow(popupView, popupView.getMeasuredWidth(), popupView.getMeasuredHeight() , true);
+
+        popupWindow.setFocusable(true);
+
+        /* el color coincide con el background del popUp y posibilita el backpressed listener.
+        Tmabién otorga la posibilidad de que se cierre el popup al tocar la pantalla fuera de su recuadro,
+        lo cuál resulta práctico ystatus.getText().toString() útil para el usuario.
+         */
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+//        popupWindow.setElevation(70);
+
+
+        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
+
+        btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
 
         cityFrom = null;
 
@@ -95,6 +141,40 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
         mapView = (MapView) view.findViewById(R.id.map);
 
         offer_text = (TextView) getActivity().findViewById(R.id.offer_text);
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.action_bar_items, menu);
+
+        infoItem = menu.findItem(R.id.action_popup);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_popup){
+
+//            if (popUpMapVisible == true)
+//                popupWindow.dismiss();
+
+
+
+                popupWindow.showAtLocation(getActivity().findViewById(R.id.content_frame), Gravity.CENTER, 0, 0);
+//                popUpMapVisible = true;
+
+                return true;
+            }
+
+        return super.onOptionsItemSelected(item);
 
     }
 

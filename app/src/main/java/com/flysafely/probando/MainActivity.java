@@ -78,21 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static GPSTracker tracker;
 
-    private MenuItem infoItem;
-
-    private PopupWindow popupWindow;
-
-    private View popupView;
-
-    private boolean popUpMapVisible;
-
     private Bundle bundle;
 
     private static String detailAlertBarTitle;
 
     private static ActionBar supportActionBar;
 
-    private static boolean upIsActive;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,10 +117,6 @@ public class MainActivity extends AppCompatActivity {
         selectedDrawerOptions = new ArrayList<>();
         currentHighlighted = -1 ;
 
-
-        //inicializar el boolean que indica si el pop up del mapa etsa visible o no
-        popUpMapVisible = false;
-
         /* Listener del click del logo en la app bar. Disableamos el botón hasta que la ejecución del
         mainFragment finalize para que el usuario no pueda usarlo exhaustivamente interrumpiendo el
         flujo normal de la aplicación.
@@ -155,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 selectedDrawerOptions.clear();
-
-                infoItem.setVisible(false);
-                popUpMapVisible = false;
             }
         });
 
@@ -211,44 +195,44 @@ public class MainActivity extends AppCompatActivity {
 
         setupDrawerToggle();
 
-        // set map Popup
-
-        popupView = getLayoutInflater().inflate(R.layout.maps_popup, null);
-
-        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-
-        popupWindow = new PopupWindow(popupView, popupView.getMeasuredWidth(), popupView.getMeasuredHeight() , true);
-
-        popupWindow.setFocusable(true);
-
-        /* el color coincide con el background del popUp y posibilita el backpressed listener.
-        Tmabién otorga la posibilidad de que se cierre el popup al tocar la pantalla fuera de su recuadro,
-        lo cuál resulta práctico ystatus.getText().toString() útil para el usuario.
-         */
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-//        popupWindow.setElevation(70);
-
-
-        /* soluciona el caso en que el usuario presione fuera del recuadro del popup y luego presione back.
-        Actualiza la variable boolean asi no tiene que presionar back dos veces.
-        */
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                popUpMapVisible = false;
-            }
-        });
-
-        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
-
-        btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+//        // set map Popup
+//
+//        popupView = getLayoutInflater().inflate(R.layout.maps_popup, null);
+//
+//        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+//
+//        popupWindow = new PopupWindow(popupView, popupView.getMeasuredWidth(), popupView.getMeasuredHeight() , true);
+//
+//        popupWindow.setFocusable(true);
+//
+//        /* el color coincide con el background del popUp y posibilita el backpressed listener.
+//        Tmabién otorga la posibilidad de que se cierre el popup al tocar la pantalla fuera de su recuadro,
+//        lo cuál resulta práctico ystatus.getText().toString() útil para el usuario.
+//         */
+//        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+//
+////        popupWindow.setElevation(70);
+//
+//
+//        /* soluciona el caso en que el usuario presione fuera del recuadro del popup y luego presione back.
+//        Actualiza la variable boolean asi no tiene que presionar back dos veces.
+//        */
+//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                popUpMapVisible = false;
+//            }
+//        });
+//
+//        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
+//
+//        btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                popupWindow.dismiss();
+//            }
+//        });
 
         // GPS
 
@@ -330,11 +314,8 @@ public class MainActivity extends AppCompatActivity {
 
                 detailAlertFragment.setArguments(args);
 
-
-                backStackAdd(new MainFragment(), home_title);
                 backStackAdd(new ListAlertFragment(), alerts_title);
                 backStackAdd(detailAlertFragment, alerts_detail_title);
-                MainFragment.finishProgressDialog();
                 selectedDrawerOptions.add(ALERTS_POSITION - 1);
                 currentHighlighted = ALERTS_POSITION - 1;
             }
@@ -353,35 +334,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_items, menu);
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.action_bar_items, menu);
+//
+//        infoItem = menu.findItem(R.id.action_popup);
+//        infoItem.setVisible(false);
+//
+//        return true;
+//    }
 
-        infoItem = menu.findItem(R.id.action_popup);
-        infoItem.setVisible(false);
-
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.action_popup:
-
-
-                    if (popUpMapVisible == true)
-                        popupWindow.dismiss();
-
-
-                    else {
-                        popupWindow.showAtLocation(findViewById(R.id.content_frame), Gravity.CENTER, 0, 0);
-                        popUpMapVisible = true;
-                    }
-        }
-
-
-        return true;
-    }
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        System.exit(0);
+//
+//        switch (item.getItemId()) {
+//
+//            case R.id.action_popup:
+//
+//
+//                    if (popUpMapVisible == true)
+//                        popupWindow.dismiss();
+//
+//
+//                    else {
+//                        popupWindow.showAtLocation(findViewById(R.id.content_frame), Gravity.CENTER, 0, 0);
+//                        popUpMapVisible = true;
+//                    }
+//        }
+//
+//
+//        return true;
+//    }
 
 
     /* una vez selecionada una opción del drawer, dejar un color de fondo en la misma así
@@ -428,7 +411,6 @@ public class MainActivity extends AppCompatActivity {
             case ALERTS_POSITION:
 
                 backStackAdd(new ListAlertFragment(), alerts_title);
-                infoItem.setVisible(false);
 
                 break;
 
@@ -437,7 +419,6 @@ public class MainActivity extends AppCompatActivity {
                 showDrawerToggle();
                 backStackAdd(new OffersFragment(), offers_title);
                 setActionBarTitle(offers_title);
-                infoItem.setVisible(true);
 
                 break;
 
@@ -446,7 +427,6 @@ public class MainActivity extends AppCompatActivity {
                 showDrawerToggle();
                 backStackAdd(new rankingFragment(), califications_title);
                 setActionBarTitle(califications_title);
-                infoItem.setVisible(false);
 
                 break;
 
@@ -455,55 +435,18 @@ public class MainActivity extends AppCompatActivity {
                 showDrawerToggle();
                 backStackAdd(new SettingsFragment(), configuration_title);
                 setActionBarTitle(configuration_title);
-                infoItem.setVisible(false);
 
                 break;
         }
 
-//        TextView textview = (TextView) findViewById(R.id.main_text);
-//
-//        textview.setText("probando" + tracker.getLatitude() + tracker.getLongitude());
-
-        //setupUpButton();
-
-
         drawerLayout.closeDrawer(drawerList);
     }
-//
-//    public void toggleDrawerUse(boolean useDrawer) {
-//        // Enable/Disable the icon being used by the drawer
-//        mDrawerToggle.setDrawerIndicatorEnabled(useDrawer);
-//
-//        // Switch between the listeners as necessary
-//        if(useDrawer)
-//            mDrawerToggle.setToolbarNavigationClickListener(mOriginalListener);
-//        else
-//            mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(getActivity(), "Custom listener", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//    }
-
-//    public boolean onOptionsItemSelected(MenuItem menuItem) {
-//        if (menuItem.getItemId() == android.R.id.home) {
-//            onBackPressed();
-//            Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(menuItem);
-//    }
 
     @Override
     public void onBackPressed() {
 
         if (drawerLayout.isDrawerOpen(drawerList)){
             drawerLayout.closeDrawer(drawerList);
-        }
-
-        else if (popUpMapVisible) {
-            popupWindow.dismiss();
         }
 
         else {
@@ -531,12 +474,6 @@ public class MainActivity extends AppCompatActivity {
             String currentTitle = getTopStackName(index);
 
             String previousTitle = getTopStackName(index - 1);
-
-            if (previousTitle.equals(offers_title)) {
-                infoItem.setVisible(true);
-            } else {
-                infoItem.setVisible(false);
-            }
 
             if (currentTitle == alerts_add_title || currentTitle == alerts_detail_title)
                 showDrawerToggle();
@@ -646,7 +583,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolBar);
 
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public static void showUpButton() {
@@ -699,19 +635,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(index);
         return backEntry.getName();
     }
-
-
-//    private void alignToggle() {
-//
-//        for (int i = 0; i < toolbar.getChildCount(); i++) {
-//            // make toggle drawable center-vertical, you can make each view alignment whatever you want
-//            if (toolbar.getChildAt(i) instanceof ImageButton) {
-//                Toolbar.LayoutParams lp = (Toolbar.LayoutParams) toolbar.getChildAt(i).getLayoutParams();
-//                lp.gravity = Gravity.CENTER_VERTICAL;
-//            }
-//        }
-//
-//    }
 
     public static void AddtoBackStack(Fragment fragment, String tag) {backStackAdd(fragment, tag); }
 

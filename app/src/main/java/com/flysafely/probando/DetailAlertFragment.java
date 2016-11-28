@@ -177,7 +177,8 @@ public class DetailAlertFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_popup){
+
+        if(id == R.id.action_filter){
             deleteFlight();
             return true;
         }

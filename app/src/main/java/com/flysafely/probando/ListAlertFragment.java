@@ -150,7 +150,6 @@ public class ListAlertFragment extends Fragment {
                         switch(item.getItemId()) {
                             case R.id.action_filter:
                                 deleteFlight(listItems);
-                                Toast.makeText(getActivity(), "deletee anda", Toast.LENGTH_LONG).show();
                                 itemsSelected = 0;
                                 flights.removeAll(listItems);
                                 listItems.clear();

@@ -46,7 +46,7 @@ public class MainFragment extends Fragment {
 
     private static final int CANT_OFFERS = 3;
 
-    private static ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     private TextView mainText;
 
@@ -112,7 +112,6 @@ public class MainFragment extends Fragment {
         progressDialog.setCancelable(false);
         progressDialog.show();
         getNearestCity();
-
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -262,11 +261,6 @@ public class MainFragment extends Fragment {
         super.onStop();
 
         if(progressDialog != null)
-            progressDialog.dismiss();
-    }
-
-    public static void finishProgressDialog() {
-        if (progressDialog != null)
             progressDialog.dismiss();
     }
 
