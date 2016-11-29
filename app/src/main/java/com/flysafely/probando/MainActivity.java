@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
@@ -33,6 +34,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static String home_title;
     private String alerts_title;
-    private String offers_title;
-    private String califications_title;
-    private String configuration_title;
+    private static String offers_title;
+    private static String califications_title;
+    private static String configuration_title;
     private static String alerts_add_title;
     private static String alerts_detail_title;
 
@@ -92,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupToolbar();
+
+        setLanguage();
 
         bundle = savedInstanceState;
 
@@ -195,45 +199,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupDrawerToggle();
 
-//        // set map Popup
-//
-//        popupView = getLayoutInflater().inflate(R.layout.maps_popup, null);
-//
-//        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-//
-//        popupWindow = new PopupWindow(popupView, popupView.getMeasuredWidth(), popupView.getMeasuredHeight() , true);
-//
-//        popupWindow.setFocusable(true);
-//
-//        /* el color coincide con el background del popUp y posibilita el backpressed listener.
-//        Tmabién otorga la posibilidad de que se cierre el popup al tocar la pantalla fuera de su recuadro,
-//        lo cuál resulta práctico ystatus.getText().toString() útil para el usuario.
-//         */
-//        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-//
-////        popupWindow.setElevation(70);
-//
-//
-//        /* soluciona el caso en que el usuario presione fuera del recuadro del popup y luego presione back.
-//        Actualiza la variable boolean asi no tiene que presionar back dos veces.
-//        */
-//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                popUpMapVisible = false;
-//            }
-//        });
-//
-//        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
-//
-//        btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                popupWindow.dismiss();
-//            }
-//        });
-
         // GPS
 
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -283,18 +248,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ContentObserver contentObserver = new ContentObserver(new Handler()) {
-            @Override
-            public void onChange(boolean selfChange) {
-
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-            }
-        };
-
-        getContentResolver().registerContentObserver(Settings.System.getUriFor
-                        (Settings.System.ACCELEROMETER_ROTATION),
-                true,contentObserver);
-
 
         String mainFragment = getIntent().getStringExtra("mainFragment");
 
@@ -333,39 +286,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(CURRENT_HIGHLIGHT, currentHighlighted);
 
     }
-
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.action_bar_items, menu);
-//
-//        infoItem = menu.findItem(R.id.action_popup);
-//        infoItem.setVisible(false);
-//
-//        return true;
-//    }
-
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        System.exit(0);
-//
-//        switch (item.getItemId()) {
-//
-//            case R.id.action_popup:
-//
-//
-//                    if (popUpMapVisible == true)
-//                        popupWindow.dismiss();
-//
-//
-//                    else {
-//                        popupWindow.showAtLocation(findViewById(R.id.content_frame), Gravity.CENTER, 0, 0);
-//                        popUpMapVisible = true;
-//                    }
-//        }
-//
-//
-//        return true;
-//    }
-
 
     /* una vez selecionada una opción del drawer, dejar un color de fondo en la misma así
     cuando el usuario abra el drawer sabe que opción eligió en caso de que lo olvide
@@ -418,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
 
                 showDrawerToggle();
                 backStackAdd(new OffersFragment(), offers_title);
-                setActionBarTitle(offers_title);
 
                 break;
 
@@ -453,8 +372,6 @@ public class MainActivity extends AppCompatActivity {
 
             int index = fragmentManager.getBackStackEntryCount() - 1;
 
-            Log.e("$$$$iINDEX", "ES" + index);
-
             /* Estamos en el home y queremos irnos de la app. Se handlea aca y se retorna porque
             si llamamos a super queda la aplicación sin ningun frgamento, sin layout. (solo con toolbar
             y drawer)
@@ -475,17 +392,22 @@ public class MainActivity extends AppCompatActivity {
 
             String previousTitle = getTopStackName(index - 1);
 
-            if (currentTitle == alerts_add_title || currentTitle == alerts_detail_title)
+            Log.e("$$$$iINDEX", ": " + index);
+
+            for (Integer i : selectedDrawerOptions)
+                Log.e("$$$$ITEM", ": " + i);
+
+            if (currentTitle .equals(alerts_add_title) || currentTitle.equals(alerts_detail_title))
                 showDrawerToggle();
 
             // estos fragmentos no modifican el highlight dado que ocurren dentro de una misma categoría
-            if (currentTitle != alerts_add_title && currentTitle != alerts_detail_title) {
+            if (!currentTitle.equals(alerts_add_title) && !currentTitle.equals(alerts_detail_title) && !currentTitle.contains("null")) {
 
                 int previousHighlighted = -1;
 
                 // actualizamos el elemento remarcado de las opciones del drawer
 
-                if (!selectedDrawerOptions.isEmpty())
+                if (!selectedDrawerOptions.isEmpty() && (currentHighlighted == -1 || currentHighlighted == peekSelectedDrawerOptions()) )
                     currentHighlighted = popSelectedDrawerOptions();
 
                 if (currentHighlighted != -1)
@@ -497,17 +419,19 @@ public class MainActivity extends AppCompatActivity {
                  */
                 if (index > 1 ) {
 
-                    if (previousTitle == alerts_add_title || previousTitle == alerts_detail_title) {
+                    if (previousTitle.equals(alerts_add_title) || previousTitle.equals(alerts_detail_title)) {
                         previousHighlighted = ALERTS_POSITION - 1;
 
-                        if (previousTitle == alerts_detail_title)
+                        if (previousTitle.equals(alerts_detail_title))
                             previousTitle = detailAlertBarTitle;
                     }
                     else {
-                        previousHighlighted = popSelectedDrawerOptions();
+                        if (!selectedDrawerOptions.isEmpty())
+                            previousHighlighted = popSelectedDrawerOptions();
                     }
 
-                    getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
+                    if (previousHighlighted != -1)
+                        getViewByPosition(previousHighlighted).setBackgroundColor(Color.rgb(227, 227, 227)); // #e3e3e3 palette color
                 }
 
 
@@ -647,7 +571,50 @@ public class MainActivity extends AppCompatActivity {
         detailAlertBarTitle = title;
     }
 
+    public void setLanguage() {
+        final SharedPreferences settings = this.getSharedPreferences("com.example.administrador.flysafaly", MainActivity.MODE_PRIVATE);
+
+        String lenguageGet = settings.getString("LENGUAGE", null);
+
+        Configuration config = new Configuration();
+        Locale locale;
+
+        if(lenguageGet == null) {
+            locale = new Locale("en");
+            Locale.setDefault(locale);
+            config = new Configuration();
+            config.setLocale(locale);
+            this.getBaseContext().getResources().updateConfiguration(config, this.getBaseContext().getResources().getDisplayMetrics());
+
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("LENGUAGE", getResources().getString(R.string.english_text));
+            editor.apply();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.content_frame, new SettingsFragment()).commit();
+
+        } else if(lenguageGet.equals(getResources().getString(R.string.english_text))) {
+            locale = new Locale("en");
+            Locale.setDefault(locale);
+            config = new Configuration();
+            config.setLocale(locale);
+            this.getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+        } else {
+            locale = new Locale("es");
+            Locale.setDefault(locale);
+            config = new Configuration();
+            config.setLocale(locale);
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        }
+    }
+
     public static void setHomeTitle() { setActionBarTitle(home_title);}
+
+    public static void setOffersTitle() { setActionBarTitle(offers_title);}
+
+    public static void setConfTitle() { setActionBarTitle(configuration_title);}
+
+    public static void setCalificateTitle() { setActionBarTitle(califications_title);}
 
     public static double getLatitude() {
         return tracker.getLatitude();

@@ -52,8 +52,6 @@ public class MainFragment extends Fragment {
 
     private ListView listView;
 
-    private boolean screenSensorActive;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -82,19 +80,7 @@ public class MainFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        screenSensorActive = false;
-
         MainActivity.setHomeTitle();
-
-        if (savedInstanceState != null) {
-            offerArray = (ArrayList<Offer>) savedInstanceState.getSerializable(OFFERS_ITEMS);
-
-            if (listView == null || offerArray == null || !isAdded() || getActivity() == null)
-                return;
-            listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
-            return;
-        }
-
 
         if ( MainActivity.getLatitude() == GPSTracker.LAT_ERROR_VALUE || MainActivity.getLongitud() == GPSTracker.LONG_ERROR_VALUE) {
             mainText.setText(R.string.location_failed);
@@ -102,9 +88,16 @@ public class MainFragment extends Fragment {
             return;
         }
 
-        if (android.provider.Settings.System.getInt(getActivity().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-            screenSensorActive = true;
+        if (savedInstanceState != null) {
+            offerArray = (ArrayList<Offer>) savedInstanceState.getSerializable(OFFERS_ITEMS);
+
+            if (offerArray == null) {
+                offerArray= new ArrayList<>();
+                getNearestCity();
+            }
+            else
+                listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
+            return;
         }
 
         progressDialog = new ProgressDialog(getActivity());
@@ -140,8 +133,6 @@ public class MainFragment extends Fragment {
                     MainActivity.EnableGoHome();
                     progressDialog.dismiss();
 
-                    if (screenSensorActive)
-                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                 }
             }
         }, new Response.ErrorListener() {
@@ -152,8 +143,6 @@ public class MainFragment extends Fragment {
                 mainText.setText(R.string.city_not_found);
                 progressDialog.dismiss();
 
-                if (screenSensorActive)
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -198,8 +187,6 @@ public class MainFragment extends Fragment {
                     MainActivity.EnableGoHome();
                     progressDialog.dismiss();
 
-                    if (screenSensorActive)
-                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
                 }
             }
         }, new Response.ErrorListener() {
@@ -209,8 +196,6 @@ public class MainFragment extends Fragment {
                 MainActivity.EnableGoHome();
                 progressDialog.dismiss();
 
-                if (screenSensorActive)
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             }
         });
         RequestManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
@@ -240,10 +225,8 @@ public class MainFragment extends Fragment {
 
         listView.setAdapter(new OfferArrayAdapter(getActivity(), offerArray));
 
-        progressDialog.dismiss();
-
-        if (screenSensorActive)
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        if (progressDialog != null)
+            progressDialog.dismiss();
 
         MainActivity.EnableGoHome();
     }

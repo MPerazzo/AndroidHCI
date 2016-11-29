@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="Tags">
-	    <item>Alertas</item>
-	    <item>Ofertas</item>
-	    <item>Calificaciones</item>
-		<item>Configuración</item>
+		<item>@string/alerts_text</item>
+		<item>@string/offer_text</item>
+		<item>@string/calificate_text</item>
+		<item>@string/configuration_text</item>
 	</string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -668,7 +668,7 @@
     <string name="drawer_close">Cerrado</string>
     <string name="drawer_open">Abierto</string>
     <string name="err_status">not status</string>
-    <string name="error_minRating">El valor mínimo posible es media estrella.</string>
+    <string name="error_minRating">El valor mínimo posible es media estrella</string>
     <string name="error_send">Error de conexión al mandar el formulario, intente nuevamente en breve</string>
     <string name="error_succeed">Su formulario ha sido enviado exitosamente</string>
     <string name="fields_incomplete_msg">You must complete all the fields.</string>

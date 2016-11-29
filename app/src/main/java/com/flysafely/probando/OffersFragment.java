@@ -180,6 +180,8 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
+        MainActivity.setOffersTitle();
+
         bundle = savedInstanceState;
 
         precioString = getString(R.string.precio);

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -115,12 +116,15 @@ public class DetailAlertFragment extends Fragment {
                 airlineCode= args.getString("AIRLINE");
                 flightNumber= args.getString("FLIGHT_NUMBER");
 
+            Log.e("$$$$$ENTRO1111", "--");
             }
         }
 
         else {
             airlineCode = savedInstanceState.getString("AIRLINE");
             flightNumber = savedInstanceState.getString("FLIGHT_NUMBER");
+
+            Log.e("$$$$$ENTRO2222", "--");
         }
 
         MainActivity.setDetailAlertBarTitle(airlineCode + " " + flightNumber);

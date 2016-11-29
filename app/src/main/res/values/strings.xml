@@ -57,7 +57,7 @@
     <string name="airline_error">Aerolinea invalida</string>
     <string name="flightnumber_error">Numero de vuelo invalido</string>
     <string name="error_succeed">Su formulario ha sido enviado exitosamente</string>
-    <string name="error_minRating">El valor mínimo posible es media estrella.</string>
+    <string name="error_minRating">El valor mínimo posible es media estrella</string>
     <string name="sending_calificate"> Sending review, please wait.. </string>
 
     <!--database-->

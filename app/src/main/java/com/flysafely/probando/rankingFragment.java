@@ -116,6 +116,8 @@ public class rankingFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        MainActivity.setCalificateTitle();
+
         airlinesTags = new ArrayList<String>();
 
         prevAmabilidadRating = MIN_RATING;
