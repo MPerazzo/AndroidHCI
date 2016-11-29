@@ -37,6 +37,8 @@ public class SettingsFragment extends Fragment {
 
         final String[] lenguages = {getResources().getString(R.string.english_text),getResources().getString(R.string.spanish_text)};
 
+        MainActivity.setActionBarTitle(getString(R.string.title_fragment_settings));
+
         if(spinnerLeng != null) {
             spinnerLeng.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, lenguages));
 
@@ -58,9 +60,9 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("LENGUAGE", getResources().getString(R.string.english_text));
                 editor.apply();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                fragmentTransaction.replace(R.id.content_frame, new SettingsFragment()).commit();
+                MainActivity.popBackstack();
+                MainActivity.AddtoBackStack(new SettingsFragment(), getActivity().getResources().getString(R.string.title_fragment_califications));
 
             } else if(lenguageGet.equals(getResources().getString(R.string.english_text))) {
                 spinnerLeng.setSelection(0);
@@ -79,6 +81,16 @@ public class SettingsFragment extends Fragment {
                 getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
 
             }
+
+            DrawerListAdapter drawerList = MainActivity.probando();
+
+            drawerList.getItem(0).setName(getString(R.string.title_fragment_alerts));
+            drawerList.getItem(1).setName(getString(R.string.title_fragment_offers));
+            drawerList.getItem(2).setName(getString(R.string.title_fragment_califications));
+            drawerList.getItem(4).setName(getString(R.string.title_fragment_settings));
+
+            MainActivity.setAdapter(drawerList);
+
 
             spinnerLeng.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -118,9 +130,18 @@ public class SettingsFragment extends Fragment {
                             editor.apply();
                         }
 
-                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        MainActivity.popBackstack();
+                        MainActivity.AddtoBackStack(new SettingsFragment(), getActivity().getResources().getString(R.string.title_fragment_califications));
 
-                        fragmentTransaction.replace(R.id.content_frame, new SettingsFragment()).commit();
+                        DrawerListAdapter drawerList = MainActivity.probando();
+
+                        drawerList.getItem(0).setName(getString(R.string.title_fragment_alerts));
+                        drawerList.getItem(1).setName(getString(R.string.title_fragment_offers));
+                        drawerList.getItem(2).setName(getString(R.string.title_fragment_califications));
+                        drawerList.getItem(4).setName(getString(R.string.title_fragment_settings));
+
+                        MainActivity.setAdapter(drawerList);
+
                     }
 
 

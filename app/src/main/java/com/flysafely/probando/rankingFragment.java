@@ -116,7 +116,7 @@ public class rankingFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MainActivity.setCalificateTitle();
+        MainActivity.setActionBarTitle(getString(R.string.title_fragment_califications));
 
         airlinesTags = new ArrayList<String>();
 

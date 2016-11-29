@@ -1,35 +1,35 @@
 [
     {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_cast_light.xml",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_cast_light.xml"
-    },
-    {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_btn_radio_material.xml"
     },
     {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_cab_background_top_material.xml"
-    },
-    {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_media_route_connecting_mono_dark.xml",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_media_route_connecting_mono_dark.xml"
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_cast_light.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_cast_light.xml"
     },
     {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_settings_light.xml",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_settings_light.xml"
     },
     {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_media_route_connecting_mono_dark.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_media_route_connecting_mono_dark.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/res/drawable/notification_bg_low.xml"
     },
     {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ratingbar_material.xml"
-    },
-    {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_ic_ab_back_material.xml",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
+        "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable/abc_ratingbar_material.xml"
     },
     {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/offer_landscape_2.jpg",
@@ -98,10 +98,6 @@
     {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/offer_landscape_1.jpg",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/drawable/offer_landscape_1.jpg"
-    },
-    {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/ic_notifications_black_24dp.png",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/drawable/ic_notifications_black_24dp.png"
     },
     {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
@@ -278,9 +274,5 @@
     {
         "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/mr_ic_play_light.xml",
         "source": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/res/drawable/mr_ic_play_light.xml"
-    },
-    {
-        "merged": "/home/matias/AndroidStudioProjects/Probando/app/build/intermediates/res/merged/debug/drawable/ic_delete_white_24dp.png",
-        "source": "/home/matias/AndroidStudioProjects/Probando/app/src/main/res/drawable/ic_delete_white_24dp.png"
     }
 ]

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
 	<string-array name="Tags">
 		<item>@string/alerts_text</item>
 		<item>@string/offer_text</item>

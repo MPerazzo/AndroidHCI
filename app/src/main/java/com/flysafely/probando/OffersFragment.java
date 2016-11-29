@@ -180,7 +180,7 @@ public class OffersFragment extends Fragment implements OnMapReadyCallback, Goog
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
-        MainActivity.setOffersTitle();
+        MainActivity.setActionBarTitle(getString(R.string.title_fragment_offers));
 
         bundle = savedInstanceState;
 

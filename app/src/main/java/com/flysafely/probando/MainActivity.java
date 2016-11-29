@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static ActionBar supportActionBar;
 
+    private static DrawerListAdapter listAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -192,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Relacionar el adaptador y la escucha de la lista del drawer
-        drawerList.setAdapter(new DrawerListAdapter(this, R.layout.drawer_list_item, items));
+        listAdapter = new DrawerListAdapter(this, R.layout.drawer_list_item, items);
+        drawerList.setAdapter(listAdapter);
 
         // set drawer listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -610,12 +613,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setHomeTitle() { setActionBarTitle(home_title);}
 
-    public static void setOffersTitle() { setActionBarTitle(offers_title);}
-
-    public static void setConfTitle() { setActionBarTitle(configuration_title);}
-
-    public static void setCalificateTitle() { setActionBarTitle(califications_title);}
-
     public static double getLatitude() {
         return tracker.getLatitude();
     }
@@ -627,4 +624,10 @@ public class MainActivity extends AppCompatActivity {
     public static void EnableGoHome() {actionBarHomeButton.setEnabled(true);}
 
     public static void goHome() { actionBarHomeButton.performClick(); }
+
+    public static DrawerListAdapter probando() { return listAdapter; }
+
+    public static void popBackstack() { fragmentManager.popBackStack(); }
+
+    public static void setAdapter(DrawerListAdapter listAdapter) { drawerList.setAdapter(listAdapter);}
 }
